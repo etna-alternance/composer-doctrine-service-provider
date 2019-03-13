@@ -1,0 +1,25 @@
+# Default Profile for tests
+default:
+    formatters:
+        progress:
+            decorated:           true
+            verbose:             true
+            time:                true
+            language:            fr
+            output_path:         null
+            multiline_arguments: true
+
+    suites:
+        default:
+            paths:
+                - '%paths.base%/features/suites'
+            contexts:
+                - FeatureContext
+                # - ETNA\FeatureContext\DoctrineContext:
+                #     max_queries: 20
+                - ETNA\FeatureContext\ApiContext
+
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                class: TestApp\Kernel
