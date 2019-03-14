@@ -15,7 +15,8 @@ doctrine:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
 
-        url: '%env(resolve:DATABASE_URL)%'
+        # define a static test url because we are in testing
+        url: "mysql://root:@127.0.0.1:3306/test"
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore
@@ -27,3 +28,21 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'TestApp\Entity'
                 alias: TestApp
+        dql:
+            string_functions:
+                md5: DoctrineExtensions\Query\Mysql\Md5
+                sh1: DoctrineExtensions\Query\Mysql\Sha1
+                sh2: DoctrineExtensions\Query\Mysql\Sha2
+            numeric_functions:
+                rand:  DoctrineExtensions\Query\Mysql\Rand
+                round: DoctrineExtensions\Query\Mysql\Round
+            datetime_functions:
+                date: DoctrineExtensions\Query\Mysql\Date
+                datediff: DoctrineExtensions\Query\Mysql\DateDiff
+                dateadd: DoctrineExtensions\Query\Mysql\DateAdd
+                dateformat: DoctrineExtensions\Query\Mysql\DateFormat
+                hour: DoctrineExtensions\Query\Mysql\Hour
+                day: DoctrineExtensions\Query\Mysql\Day
+                week: DoctrineExtensions\Query\Mysql\Week
+                month: DoctrineExtensions\Query\Mysql\Month
+                year:  DoctrineExtensions\Query\Mysql\Year

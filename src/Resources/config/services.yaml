@@ -1,0 +1,7 @@
+services:
+    doctrine.debug_service:
+        class: 'ETNA\Doctrine\Services\ETNADoctrineService'
+        public: true # Afin que les commandes puissent accéder au service, comme on ne peut utiliser l'injection
+        arguments: ['@doctrine.orm.entity_manager']
+
+    ETNA\Doctrine\Services\ETNADoctrineExtension: '@doctrine.debug_service'

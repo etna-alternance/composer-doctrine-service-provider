@@ -26,3 +26,10 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    doctrine.debug_service:
+        class: 'ETNA\Doctrine\Services\DoctrineDebugSubscriber'
+        autowire: true
+        public: true # Afin que les commandes puissent accéder au service, comme on ne peut utiliser l'injection
+
+    ETNA\Doctrine\Services\DoctrineDebugSubscriber: '@doctrine.debug_service'
