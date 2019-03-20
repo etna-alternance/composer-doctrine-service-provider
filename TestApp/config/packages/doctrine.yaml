@@ -37,12 +37,12 @@ doctrine:
                 rand:  DoctrineExtensions\Query\Mysql\Rand
                 round: DoctrineExtensions\Query\Mysql\Round
             datetime_functions:
-                date: DoctrineExtensions\Query\Mysql\Date
-                datediff: DoctrineExtensions\Query\Mysql\DateDiff
-                dateadd: DoctrineExtensions\Query\Mysql\DateAdd
+                date:       DoctrineExtensions\Query\Mysql\Date
+                datediff:   DoctrineExtensions\Query\Mysql\DateDiff
+                dateadd:    DoctrineExtensions\Query\Mysql\DateAdd
                 dateformat: DoctrineExtensions\Query\Mysql\DateFormat
-                hour: DoctrineExtensions\Query\Mysql\Hour
-                day: DoctrineExtensions\Query\Mysql\Day
-                week: DoctrineExtensions\Query\Mysql\Week
-                month: DoctrineExtensions\Query\Mysql\Month
-                year:  DoctrineExtensions\Query\Mysql\Year
+                hour:       DoctrineExtensions\Query\Mysql\Hour
+                day:        DoctrineExtensions\Query\Mysql\Day
+                week:       DoctrineExtensions\Query\Mysql\Week
+                month:      DoctrineExtensions\Query\Mysql\Month
+                year:       DoctrineExtensions\Query\Mysql\Year

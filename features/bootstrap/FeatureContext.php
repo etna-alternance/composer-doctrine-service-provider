@@ -2,6 +2,9 @@
 
 use ETNA\FeatureContext\BaseContext;
 use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
+use Behat\Behat\Tester\Exception\PendingException;
+use ETNA\Doctrine\Services\EtnaDoctrineService;
+use function GuzzleHttp\json_encode;
 /**
  * This context class contains the definitions of the steps used by the demo
  * feature file. Learn how to get started with Behat and BDD on Behat's website.
@@ -10,60 +13,21 @@ use Behat\Testwork\Hook\Scope\BeforeSuiteScope;
  */
 class FeatureContext extends BaseContext
 {
-    static private $max_queries = 10;
+    static private $max_queries;
     static private $query_count = 0;
-    static private $parameters = [];
 
     public function __construct($max_queries)
     {
         self::$max_queries = $max_queries;
     }
 
-    public function checkMaxQueries($method, $response)
+    public function checkMaxQueries($response)
     {
-        if (in_array($method, ['GET', 'PUT', 'DELETE']) && $response["headers"]["x-orm-profiler-count"] >= self::$max_queries) {
-            $queries = [];
-            foreach (json_decode($response["headers"]["x-orm-profiler-queries"]) as $query) {
-                $queries[md5($query->sql)]["sql"]      = $query->sql;
-                $queries[md5($query->sql)]["params"][] = $query->params;
-            }
-
+        $actual_queries_count = $response["headers"]["x-orm-profiler-count"];
+        self::$query_count   += $actual_queries_count;
+        if ($actual_queries_count >= self::$max_queries) {
             throw new PendingException("Too many SQL queries ({$response["headers"]["x-orm-profiler-count"]})");
         }
-    }
-
-    /** @BeforeSuite */
-    public static function setUpParams(BeforeSuiteScope $scope)
-    {
-        $environment = $scope->getEnvironment();
-        $contexts    = $environment->getContextClassesWithArguments();
-        foreach ($contexts as $context => $params) {
-            self::$parameters = array_merge(self::$parameters, $params);
-        }
-    }
-
-    /**
-     * @BeforeScenario
-     */
-    public function resetProfiler()
-    {
-        // Ouais
-
-        $container = $this->getContainer();
-        $debug_stack = $container->get('doctrine.debug_service')->getDebugStack();
-        self::$query_count += $debug_stack->currentQuery;
-        $debug_stack->queries      = [];
-        $debug_stack->currentQuery = 0;
-        $container->get('doctrine.debug_service')->setDebugStack($debug_stack);
-        self::$max_queries = $this->getParameter("max_queries");
-    }
-
-    public function getParameter($name)
-    {
-        if (false === isset(self::$parameters[$name])) {
-            throw new \Exception("Parameter {$name} not set");
-        }
-        return self::$parameters[$name];
     }
 
     /**
@@ -73,4 +37,31 @@ class FeatureContext extends BaseContext
     {
         self::$max_queries = $nb;
     }
+
+    /**
+    * @AfterSuite
+    */
+    public static function showQueryCount()
+    {
+        echo "\n# total queries : ", self::$query_count, "\n";
+    }
+
+    //  /**
+    //  * @BeforeScenario
+    //  */
+    // public function beginTransaction()
+    // {
+    //     $em = $this->getContainer()->get('doctrine')->getManager();
+    //     $em->getConnection()->beginTransaction();
+    //     $em->clear();
+    // }
+
+    // /**
+    //  * @AfterScenario
+    //  */
+    // public function rollback()
+    // {
+    //     $em = $this->getContainer()->get('doctrine')->getManager();
+    //     $em->getConnection()->rollback();
+    // }
 }

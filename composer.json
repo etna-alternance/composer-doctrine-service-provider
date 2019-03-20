@@ -47,6 +47,7 @@
         "behat/symfony2-extension": "^2.1",
         "etna/composer-behat-utils": "^3.0.0-alpha.1",
         "symfony/orm-pack": "^1.0",
-        "sensio/framework-extra-bundle": "^5.2"
+        "sensio/framework-extra-bundle": "^5.2",
+        "symfony/console": "^4.2"
     }
 }

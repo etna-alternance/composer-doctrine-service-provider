@@ -15,7 +15,7 @@ default:
                 - '%paths.base%/features/suites'
             contexts:
                 - FeatureContext:
-                    max_queries: 10
+                    max_queries: 42
                 # - ETNA\FeatureContext\DoctrineContext:
                 #     max_queries: 20
                 - ETNA\FeatureContext\ApiContext
