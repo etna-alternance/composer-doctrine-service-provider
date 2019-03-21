@@ -18,12 +18,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ETNA\\Doctrine\\": "src"
+            "ETNA\\Doctrine\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "TestApp\\": "TestApp/src"
+            "TestApp\\": "TestApp/src/"
         }
     },
     "repositories": [
@@ -48,6 +48,18 @@
         "etna/composer-behat-utils": "^3.0.0-alpha.1",
         "symfony/orm-pack": "^1.0",
         "sensio/framework-extra-bundle": "^5.2",
-        "symfony/console": "^4.2"
+        "symfony/console": "^4.2",
+        "phpunit/php-code-coverage": "^6.1",
+        "phpunit/phpcov": "^5.0",
+        "phploc/phploc": "^4.0",
+        "squizlabs/php_codesniffer": "^3.4",
+        "friendsofphp/php-cs-fixer": "^2.14",
+        "phpmd/phpmd": "^2.6",
+        "sebastian/phpcpd": "^4.1",
+        "php-coveralls/php-coveralls": "^2.1",
+        "scrutinizer/ocular": "^1.5",
+        "phpstan/phpstan": "^0.11.4",
+        "povils/phpmnd": "^2.1",
+        "phpmetrics/phpmetrics": "^2.4"
     }
 }

@@ -1,15 +1,18 @@
 <?php
+/**
+ * PHP version 7.1
+ * @author BLU <dev@etna-alternance.net>
+ */
+
+declare(strict_types=1);
 
 namespace ETNA\Doctrine\Services;
 
 use Doctrine\DBAL\Logging\DebugStack;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\DBAL\Logging\LoggerChain;
-
 
 class EtnaDoctrineService implements EventSubscriberInterface
 {
@@ -18,7 +21,7 @@ class EtnaDoctrineService implements EventSubscriberInterface
         $this->em = $em;
     }
 
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(FilterResponseEvent $event): void
     {
         $debug = $this->debug;
 
@@ -27,12 +30,12 @@ class EtnaDoctrineService implements EventSubscriberInterface
 
         $queries = $debug->queries;
 
-        $response->headers->set("X-ORM-Profiler-Route", $request->getPathInfo());
-        $response->headers->set("X-ORM-Profiler-Count", count($queries));
-        $response->headers->set("X-ORM-Profiler-Queries", json_encode($queries));
+        $response->headers->set('X-ORM-Profiler-Route', $request->getPathInfo());
+        $response->headers->set('X-ORM-Profiler-Count', \count($queries));
+        $response->headers->set('X-ORM-Profiler-Queries', json_encode($queries));
     }
 
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(): void
     {
         $this->debug = new DebugStack();
         $this->em->getConnection()->getConfiguration()->setSQLLogger($this->debug);
@@ -41,8 +44,8 @@ class EtnaDoctrineService implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::RESPONSE => 'onKernelResponse',
-            KernelEvents::CONTROLLER => 'onKernelController'
+            KernelEvents::RESPONSE   => 'onKernelResponse',
+            KernelEvents::CONTROLLER => 'onKernelController',
         ];
     }
 }
