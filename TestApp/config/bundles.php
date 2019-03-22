@@ -6,5 +6,5 @@ return [
     Doctrine\Bundle\DoctrineBundle\DoctrineBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
     Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle::class => ['all' => true],
-    ETNA\Doctrine\ETNADoctrineBundle::class => ['all' => true]
+    ETNA\Doctrine\EtnaDoctrineBundle::class => ['dev' => true, 'test' => true]
 ];

@@ -19,6 +19,7 @@ default:
                     max_queries: 11
                 - ETNA\FeatureContext\ApiContext
                 - ETNA\FeatureContext\ExceptionContainerContext
+                - ETNA\FeatureContext\SymfonyTestKernelContext
 
     extensions:
         Behat\Symfony2Extension:
@@ -45,6 +46,7 @@ ci:
                     max_queries: 11
                 - ETNA\FeatureContext\ApiContext
                 - ETNA\FeatureContext\ExceptionContainerContext
+                - ETNA\FeatureContext\SymfonyTestKernelContext
     extensions:
         Behat\Symfony2Extension:
             kernel:

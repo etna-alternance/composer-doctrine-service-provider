@@ -10,4 +10,17 @@ use ETNA\FeatureContext\BaseContext;
  */
 class FeatureContext extends BaseContext
 {
+    /**
+     * @Given je veux récupérer un service :sevice_name
+     */
+    public function jeVeuxRecupererUnService($service_name)
+    {
+        $container = $this->getContainer();
+
+        $this->getContext("ETNA\FeatureContext\ExceptionContainerContext")->try(
+            function () use ($container, $service_name) {
+                $container->get($service_name);
+            }
+        );
+    }
 }

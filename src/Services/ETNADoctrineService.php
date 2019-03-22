@@ -16,6 +16,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class EtnaDoctrineService implements EventSubscriberInterface
 {
+    private $em;
+    private $debug;
+
     public function __construct(EntityManagerInterface $em)
     {
         $this->em = $em;
@@ -28,11 +31,12 @@ class EtnaDoctrineService implements EventSubscriberInterface
         $response = $event->getResponse();
         $request  = $event->getRequest();
 
-        $queries = $debug->queries;
+        $string_queries = json_encode($debug->queries) ?: '';
+        $nb_queries     = \count($debug->queries);
 
         $response->headers->set('X-ORM-Profiler-Route', $request->getPathInfo());
-        $response->headers->set('X-ORM-Profiler-Count', \count($queries));
-        $response->headers->set('X-ORM-Profiler-Queries', json_encode($queries));
+        $response->headers->set('X-ORM-Profiler-Count', "{$nb_queries}");
+        $response->headers->set('X-ORM-Profiler-Queries', $string_queries);
     }
 
     public function onKernelController(): void
