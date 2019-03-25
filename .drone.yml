@@ -5,7 +5,12 @@ env:
   - APPLICATION_ENV=test
   - COVERALLS_REPO_TOKEN=$$COVERALLS_TOKEN
   - COVERALLS_SERVICE_NAME=drone.io
+  - MYSQL_MODULES_USER=root
+  - MYSQL_MODULES_PASS=
+  - MYSQL_MODULES_BASE=test_doctrine_provider
 script:
+  - nb=1 ; while [ $nb -lt 20 ] && ! echo "show databases;" | mysql -NrB -u "$MYSQL_MODULES_USER" -h "$MYSQL_MODULES_HOST" --password="$MYSQL_MODULES_PASS" ; do echo "Try n $nb mysql not ready"; nb=$(($nb + 1)); sleep 1; done
+  - echo "CREATE DATABASE IF NOT EXISTS $MYSQL_MODULES_BASE" | mysql -NrB -u "$MYSQL_MODULES_USER" -h "$MYSQL_MODULES_HOST" --password="$MYSQL_MODULES_PASS"
   - composer global require phpdocumentor/phpdocumentor --no-interaction --prefer-dist --no-progress
   - composer install --dev --no-interaction --prefer-dist --no-progress --no-scripts
   - composer phing
