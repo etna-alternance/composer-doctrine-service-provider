@@ -10,6 +10,9 @@ namespace ETNA\Doctrine;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * Classe mère du Doctrine Bundle ETNA.
+ */
 class EtnaDoctrineBundle extends Bundle
 {
 }

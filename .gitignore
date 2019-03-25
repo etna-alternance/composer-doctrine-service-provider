@@ -38,6 +38,7 @@ vendor/
 
 translations/
 tests/
+doc/
 
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
