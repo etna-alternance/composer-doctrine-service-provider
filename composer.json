@@ -31,7 +31,7 @@
            "type": "composer",
            "url":  "https://blu-composer.herokuapp.com"
        }
-   ],
+    ],
     "scripts": {
         "test": "behat",
         "behat": "behat",
