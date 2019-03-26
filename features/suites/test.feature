@@ -16,3 +16,8 @@ Scénario: on test une requète sur notre api de test alors qu'on n'a pas le dro
 Scénario: on test une simple requête sur notre api de test sans restriction
     Quand           je fais un GET sur /product
     Alors           ca devrait s'être bien déroulé
+
+Scénario: La commande devrait exister
+    Alors la commande "test:dump" devrait exister
+    Etant donné que je lance la commande "test:dump" avec les paramêtres contenus dans "params/params.json"
+    Alors       ca devrait s'être bien déroulé
