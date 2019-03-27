@@ -16,7 +16,7 @@ doctrine:
             collate: utf8mb4_unicode_ci
 
         # define a static test url because we are in testing
-        url: "mysql://root:@127.0.0.1:3306/test"
+        url: "mysql://root:@127.0.0.1:3306/test_doctrine_provider"
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: doctrine.orm.naming_strategy.underscore

@@ -15,29 +15,25 @@ class TestDumpCommand extends ContainerAwareCommand
         $this
             ->setName('test:dump')
             ->setDescription('Dump all sql file, in test database')
-            ->addOption('files', './features/data/test*.sql', InputOption::VALUE_OPTIONAL, 'If set, the task will yell in uppercase letters'
-            )
+            ->addOption('user', 'u', InputOption::VALUE_OPTIONAL, 'user for database connection', 'root')
+            ->addOption('password', 'pwd', InputOption::VALUE_OPTIONAL, 'password for database connection')
+            ->addOption('host', null, InputOption::VALUE_OPTIONAL, 'host address of the database', '127.0.0.1')
+            ->addOption('files', 'f', InputOption::VALUE_OPTIONAL, 'directory where sql files are stored', './features/data/test*.sql')
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input)
     {
-        // $name = $input->getArgument('name');
-        // if ($name) {
-        //     $text = 'Hello '.$name;
-        // } else {
-        //     $text = 'Hello';
-        // }
-        // echo json_encode(glob("./features/data/test*.sql"));die;
-        $files = glob($input->getOption('files'));
+        $files    = glob($input->getOption('files'));
+        $user     = $input->getOption('user');
+        $password = $input->getOption('password');
+        $host     = $input->getOption('host');
 
         foreach($files as $file) {
             $cat   = escapeshellcmd("cat {$file}");
-            $mysql = escapeshellcmd("mysql -NrB -u root -h 127.0.0.1 --password= test_doctrine_provider");
+            $mysql = escapeshellcmd("mysql -NrB -u {$user} -h {$host} --password={$password} test_doctrine_provider");
             $cmd   = "{$cat} | {$mysql}";
             passthru($cmd);
         }
-
-        $output->writeln("WEHS");
     }
 }
