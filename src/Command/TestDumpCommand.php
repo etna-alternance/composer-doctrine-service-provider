@@ -11,6 +11,7 @@ namespace ETNA\Doctrine\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class TestDumpCommand extends ContainerAwareCommand
 {
@@ -32,7 +33,7 @@ class TestDumpCommand extends ContainerAwareCommand
         ;
     }
 
-    protected function execute(InputInterface $input): void
+    protected function execute(InputInterface $input, OutputInterface $output): void
     {
         $files    = glob($input->getOption('files'));
         $user     = $input->getOption('user');
@@ -45,5 +46,7 @@ class TestDumpCommand extends ContainerAwareCommand
             $cmd   = "{$cat} | {$mysql}";
             passthru($cmd);
         }
+
+        $output->writeln('Database dumped!');
     }
 }
