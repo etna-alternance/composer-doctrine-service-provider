@@ -8,6 +8,7 @@ env:
   - MYSQL_MODULES_USER=root
   - MYSQL_MODULES_PASS=
   - MYSQL_MODULES_BASE=test_doctrine_provider
+  - MYSQL_MODULES_HOST=127.0.0.1
 script:
   - nb=1 ; while [ $nb -lt 20 ] && ! echo "show databases;" | mysql -NrB -u "$MYSQL_MODULES_USER" -h "$MYSQL_MODULES_HOST" --password="$MYSQL_MODULES_PASS" ; do echo "Try n $nb mysql not ready"; nb=$(($nb + 1)); sleep 1; done
   - echo "CREATE DATABASE IF NOT EXISTS $MYSQL_MODULES_BASE" | mysql -NrB -u "$MYSQL_MODULES_USER" -h "$MYSQL_MODULES_HOST" --password="$MYSQL_MODULES_PASS"
