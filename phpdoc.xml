@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <phpdoc>
-    <title>etna/elasticsearch-service-provider</title>
+    <title>etna/doctrine-service-provider</title>
     <parser>
         <target>doc/build</target>
     </parser>

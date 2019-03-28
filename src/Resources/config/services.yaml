@@ -1,9 +1,9 @@
 services:
-    doctrine.debug_service:
+    doctrine.etna_debug_service:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         class: 'ETNA\Doctrine\Services\EtnaDoctrineService'
         public: true # Afin que les commandes puissent accéder au service, comme on ne peut utiliser l'injection
         arguments: ['@doctrine.orm.entity_manager']
 
-    ETNA\Doctrine\Services\EtnaDoctrineExtension: '@doctrine.debug_service'
+    ETNA\Doctrine\Services\EtnaDoctrineExtension: '@doctrine.etna_debug_service'

@@ -17,7 +17,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class EtnaDoctrineBundle extends Bundle
 {
     /**
-     * Override de la fonction registerCommands pour générer une instance de commande par index puis par type.
+     * Register la commande test:dump, permettant de refresh
+     * la db de test de l'application.
      *
      * @param Application $application L'application symfony
      */

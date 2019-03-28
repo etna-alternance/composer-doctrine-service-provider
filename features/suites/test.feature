@@ -1,9 +1,8 @@
 # language: fr
 Fonctionnalité: Je test mon bundle
 
-
 Scénario: On test que le service est bien présent
-    Etant donné que je veux récupérer un service "debug_service"
+    Etant donné que je veux récupérer un service "etna_debug_service"
     Alors       ca devrait s'être bien déroulé
 
 
@@ -18,6 +17,6 @@ Scénario: on test une simple requête sur notre api de test sans restriction
     Alors           ca devrait s'être bien déroulé
 
 Scénario: La commande devrait exister
-    Alors la commande "test:dump" devrait exister
+    Alors       la commande "test:dump" devrait exister
     Etant donné que je lance la commande "test:dump" avec les paramêtres contenus dans "params/params.json"
     Alors       ca devrait s'être bien déroulé
