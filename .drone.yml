@@ -5,17 +5,19 @@ env:
   - APPLICATION_ENV=test
   - COVERALLS_REPO_TOKEN=$$COVERALLS_TOKEN
   - COVERALLS_SERVICE_NAME=drone.io
-  - MYSQL_MODULES_USER=root
-  - MYSQL_MODULES_PASS=
-  - MYSQL_MODULES_BASE=test_doctrine_provider
-  - MYSQL_MODULES_HOST=127.0.0.1
+  - MYSQL_USER=root
+  - MYSQL_PASS=
+  - MYSQL_BASE=test_doctrine_provider
+  - MYSQL_HOST=127.0.0.1
 script:
-  - nb=1 ; while [ $nb -lt 20 ] && ! echo "show databases;" | mysql -NrB -u "$MYSQL_MODULES_USER" -h "$MYSQL_MODULES_HOST" --password="$MYSQL_MODULES_PASS" ; do echo "Try n $nb mysql not ready"; nb=$(($nb + 1)); sleep 1; done
-  - echo "CREATE DATABASE IF NOT EXISTS $MYSQL_MODULES_BASE" | mysql -NrB -u "$MYSQL_MODULES_USER" -h "$MYSQL_MODULES_HOST" --password="$MYSQL_MODULES_PASS"
+  - nb=1 ; while [ $nb -lt 20 ] && ! echo "show databases;" | mysql -NrB -u "$MYSQL_USER" -h "$MYSQL_HOST" --password="$MYSQL_PASS" ; do echo "Try n $nb mysql not ready"; nb=$(($nb + 1)); sleep 1; done
+  - echo "CREATE DATABASE IF NOT EXISTS $MYSQL_BASE" | mysql -NrB -u "$MYSQL_USER" -h "$MYSQL_HOST" --password="$MYSQL_MODULES_PASS"
   - composer global require phpdocumentor/phpdocumentor --no-interaction --prefer-dist --no-progress
   - composer install --dev --no-interaction --prefer-dist --no-progress --no-scripts
   - composer phing
   - composer coveralls
+services:
+  - bluetna/drone-mariadb
 notify:
   slack:
     webhook_url: $$SLACK_WEBHOOK_URL
