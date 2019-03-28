@@ -20,6 +20,7 @@ default:
                 - ETNA\FeatureContext\ApiContext
                 - ETNA\FeatureContext\ExceptionContainerContext
                 - ETNA\FeatureContext\SymfonyTestKernelContext
+                - ETNA\FeatureContext\CommandContext
 
     extensions:
         Behat\Symfony2Extension:
@@ -47,6 +48,7 @@ ci:
                 - ETNA\FeatureContext\ApiContext
                 - ETNA\FeatureContext\ExceptionContainerContext
                 - ETNA\FeatureContext\SymfonyTestKernelContext
+                - ETNA\FeatureContext\CommandContext
     extensions:
         Behat\Symfony2Extension:
             kernel:

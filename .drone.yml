@@ -11,7 +11,7 @@ env:
   - MYSQL_HOST=127.0.0.1
 script:
   - nb=1 ; while [ $nb -lt 20 ] && ! echo "show databases;" | mysql -NrB -u "$MYSQL_USER" -h "$MYSQL_HOST" --password="$MYSQL_PASS" ; do echo "Try n $nb mysql not ready"; nb=$(($nb + 1)); sleep 1; done
-  - echo "CREATE DATABASE IF NOT EXISTS $MYSQL_BASE" | mysql -NrB -u "$MYSQL_USER" -h "$MYSQL_HOST" --password="$MYSQL_MODULES_PASS"
+  - echo "CREATE DATABASE IF NOT EXISTS $MYSQL_BASE" | mysql -NrB -u "$MYSQL_USER" -h "$MYSQL_HOST" --password="$MYSQL_PASS"
   - composer global require phpdocumentor/phpdocumentor --no-interaction --prefer-dist --no-progress
   - composer install --dev --no-interaction --prefer-dist --no-progress --no-scripts
   - composer phing

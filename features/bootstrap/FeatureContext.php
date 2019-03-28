@@ -25,39 +25,4 @@ class FeatureContext extends BaseContext
             }
         );
     }
-
-    /**
-     * @Given la commande ":command_name" devrait exister
-     */
-    public function laCommandeDevraitExister($command_name)
-    {
-        $application = new Application($this->getKernel());
-
-        // Ca throw une exception si la commande n'existe pas
-        $application->find($command_name);
-    }
-
-
-    /**
-     * @Given je lance la commande ":command_name" avec les paramêtres contenus dans :command_params
-     * @Given je lance la commande ":command_name"
-     */
-    public function jeLanceLaCommande($command_name, $command_params = null)
-    {
-        $application = new Application($this->getKernel());
-        $command     = $application->find($command_name);
-        $tester      = new CommandTester($command);
-        $params      = [];
-
-        if (null !== $command_params) {
-            $params = json_decode(file_get_contents($this->requests_path . "/" . $command_params), true);
-        }
-
-        $this->tester = $tester;
-        $this->getContext("ETNA\FeatureContext\ExceptionContainerContext")->try(
-            function () use ($tester, $params) {
-                $tester->execute($params);
-            }
-        );
-    }
 }
