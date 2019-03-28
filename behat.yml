@@ -1,0 +1,55 @@
+# Default Profile for tests
+default:
+    formatters:
+        progress:
+            decorated:           true
+            verbose:             true
+            time:                true
+            language:            fr
+            output_path:         null
+            multiline_arguments: true
+
+    suites:
+        default:
+            paths:
+                - '%paths.base%/features/suites'
+            contexts:
+                - FeatureContext
+                - ETNA\FeatureContext\DoctrineContext:
+                    max_queries: 11
+                - ETNA\FeatureContext\ApiContext
+                - ETNA\FeatureContext\ExceptionContainerContext
+                - ETNA\FeatureContext\SymfonyTestKernelContext
+                - ETNA\FeatureContext\CommandContext
+
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                class: TestApp\Kernel
+
+ci:
+    suites:
+        default:
+            paths:
+                - '%paths.base%/features/suites'
+            contexts:
+                - ETNA\FeatureContext\CoverageContext:
+                    coverage_path: /tmp/behat/coverage
+                    whitelist:
+                        - src
+                    blacklist:
+                        - vendor
+                        - bin
+                        - tmp
+                        - Tests
+                - FeatureContext
+                - ETNA\FeatureContext\DoctrineContext:
+                    max_queries: 11
+                - ETNA\FeatureContext\ApiContext
+                - ETNA\FeatureContext\ExceptionContainerContext
+                - ETNA\FeatureContext\SymfonyTestKernelContext
+                - ETNA\FeatureContext\CommandContext
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                class: TestApp\Kernel

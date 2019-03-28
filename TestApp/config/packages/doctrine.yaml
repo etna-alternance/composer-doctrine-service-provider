@@ -1,0 +1,48 @@
+parameters:
+    # Adds a fallback DATABASE_URL if the env var is not set.
+    # This allows you to run cache:warmup even if your
+    # environment variables are not available yet.
+    # You should not need to change this value.
+    env(DATABASE_URL): ''
+
+doctrine:
+    dbal:
+        # configure these for your database server
+        driver: 'pdo_mysql'
+        server_version: '5.7'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+
+        # define a static test url because we are in testing
+        url: "mysql://root:@127.0.0.1:3306/test_doctrine_provider"
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/TestApp/src/Entity'
+                prefix: 'TestApp\Entity'
+                alias: TestApp
+        dql:
+            string_functions:
+                md5: DoctrineExtensions\Query\Mysql\Md5
+                sh1: DoctrineExtensions\Query\Mysql\Sha1
+                sh2: DoctrineExtensions\Query\Mysql\Sha2
+            numeric_functions:
+                rand:  DoctrineExtensions\Query\Mysql\Rand
+                round: DoctrineExtensions\Query\Mysql\Round
+            datetime_functions:
+                date:       DoctrineExtensions\Query\Mysql\Date
+                datediff:   DoctrineExtensions\Query\Mysql\DateDiff
+                dateadd:    DoctrineExtensions\Query\Mysql\DateAdd
+                dateformat: DoctrineExtensions\Query\Mysql\DateFormat
+                hour:       DoctrineExtensions\Query\Mysql\Hour
+                day:        DoctrineExtensions\Query\Mysql\Day
+                week:       DoctrineExtensions\Query\Mysql\Week
+                month:      DoctrineExtensions\Query\Mysql\Month
+                year:       DoctrineExtensions\Query\Mysql\Year

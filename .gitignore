@@ -19,3 +19,28 @@ vendor/
 # Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 composer.lock
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/public/bundles/
+/var/
+vendor/
+###< symfony/framework-bundle ###
+
+###> behat/symfony2-extension ###
+###< behat/symfony2-extension ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+###< phpunit/phpunit ###
+
+translations/
+tests/
+doc/
+
+###> friendsofphp/php-cs-fixer ###
+/.php_cs
+/.php_cs.cache
+###< friendsofphp/php-cs-fixer ###
