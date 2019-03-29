@@ -37,7 +37,7 @@
         </exec>
     </target>
     <target name="phpstan">
-        <exec executable="phpstan" passthru="true">
+        <exec executable="phpstan" passthru="true" checkreturn="true">
             <arg value="analyze"/>
             <arg path="src/"/>
             <arg value="--level=7"/>

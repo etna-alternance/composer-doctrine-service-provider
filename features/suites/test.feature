@@ -2,7 +2,7 @@
 Fonctionnalité: Je test mon bundle
 
 Scénario: On test que le service est bien présent
-    Etant donné que je veux récupérer un service "etna_debug_service"
+    Etant donné que je veux récupérer un service "doctrine.etna_debug_service"
     Alors       ca devrait s'être bien déroulé
 
 

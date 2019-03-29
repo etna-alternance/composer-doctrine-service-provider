@@ -6,4 +6,4 @@ services:
         public: true # Afin que les commandes puissent accéder au service, comme on ne peut utiliser l'injection
         arguments: ['@doctrine.orm.entity_manager']
 
-    ETNA\Doctrine\Services\EtnaDoctrineExtension: '@doctrine.etna_debug_service'
+    ETNA\Doctrine\Services\EtnaDoctrineService: '@doctrine.etna_debug_service'

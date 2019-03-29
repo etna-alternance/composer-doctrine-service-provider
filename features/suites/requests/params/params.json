@@ -1,3 +1,4 @@
 {
-    "--files": "./features/data/test*.sql"
+    "--files": "./features/data/test*.sql",
+    "--database": "test_doctrine_provider"
 }

@@ -26,6 +26,7 @@ default:
         Behat\Symfony2Extension:
             kernel:
                 class: TestApp\Kernel
+                env: testing
 
 ci:
     suites:
@@ -53,3 +54,4 @@ ci:
         Behat\Symfony2Extension:
             kernel:
                 class: TestApp\Kernel
+                env: testing

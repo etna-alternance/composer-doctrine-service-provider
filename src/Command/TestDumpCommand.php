@@ -29,6 +29,7 @@ class TestDumpCommand extends ContainerAwareCommand
             ->addOption('user', 'u', InputOption::VALUE_OPTIONAL, 'user for database connection', 'root')
             ->addOption('password', 'pwd', InputOption::VALUE_OPTIONAL, 'password for database connection', '')
             ->addOption('host', null, InputOption::VALUE_OPTIONAL, 'host address of the database', '127.0.0.1')
+            ->addOption('database', 'd', InputOption::VALUE_OPTIONAL, 'database name', 'test_database')
             ->addOption(
                 'files',
                 'f',
@@ -51,12 +52,13 @@ class TestDumpCommand extends ContainerAwareCommand
         $user     = \is_string($input->getOption('user')) ? (string) $input->getOption('user') : '';
         $password = \is_string($input->getOption('password')) ? (string) $input->getOption('password') : '';
         $host     = \is_string($input->getOption('host')) ? (string) $input->getOption('host') : '';
+        $db_name  = \is_string($input->getOption('database')) ? (string) $input->getOption('database') : '';
 
         $files    = glob($path);
 
         foreach ($files as $file) {
             $cat   = escapeshellcmd("cat {$file}");
-            $mysql = escapeshellcmd("mysql -NrB -u {$user} -h {$host} --password={$password} test_doctrine_provider");
+            $mysql = escapeshellcmd("mysql -NrB -u {$user} -h {$host} --password={$password} {$db_name}");
             $cmd   = "{$cat} | {$mysql}";
             passthru($cmd);
         }
