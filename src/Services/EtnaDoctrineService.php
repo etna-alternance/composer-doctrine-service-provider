@@ -76,7 +76,7 @@ class EtnaDoctrineService implements EventSubscriberInterface
      * Subscriber sur les Appels controller
      * reset la debug stack et la rajoute à l'entityManager.
      */
-    public function onKernelController(): void
+    public function onKernelRequest(): void
     {
         $this->debug = new DebugStack();
         $this->em->getConnection()->getConfiguration()->setSQLLogger($this->debug);
@@ -90,8 +90,8 @@ class EtnaDoctrineService implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::RESPONSE   => 'onKernelResponse',
-            KernelEvents::CONTROLLER => 'onKernelController',
+            KernelEvents::RESPONSE => 'onKernelResponse',
+            KernelEvents::REQUEST  => 'onKernelRequest',
         ];
     }
 }
