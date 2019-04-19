@@ -12,6 +12,7 @@ use Doctrine\DBAL\Logging\DebugStack;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
@@ -59,6 +60,10 @@ class EtnaDoctrineService implements EventSubscriberInterface
      */
     public function onKernelResponse(FilterResponseEvent $event): void
     {
+        if (!is_a($this->debug, DebugStack::class)) {
+            return;
+        }
+
         $debug = $this->debug;
 
         $response = $event->getResponse();
@@ -75,11 +80,15 @@ class EtnaDoctrineService implements EventSubscriberInterface
     /**
      * Subscriber sur les Appels controller
      * reset la debug stack et la rajoute à l'entityManager.
+     *
+     * @param GetResponseEvent $event Les données liées à l'évènement
      */
-    public function onKernelRequest(): void
+    public function onKernelRequest(GetResponseEvent $event): void
     {
-        $this->debug = new DebugStack();
-        $this->em->getConnection()->getConfiguration()->setSQLLogger($this->debug);
+        if ('OPTIONS' !== $event->getRequest()->getMethod()) {
+            $this->debug = new DebugStack();
+            $this->em->getConnection()->getConfiguration()->setSQLLogger($this->debug);
+        }
     }
 
     /**

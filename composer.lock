@@ -2833,16 +2833,16 @@
         },
         {
             "name": "etna/composer-behat-utils",
-            "version": "v3.0.5",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/etna-alternance/composer-behat-utils.git",
-                "reference": "4cc194afc8dcd30239b942c34c69a108ceca8097"
+                "reference": "6f825de3020ebde479ab46f35398c70e7d041834"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etna-alternance/composer-behat-utils/zipball/4cc194afc8dcd30239b942c34c69a108ceca8097",
-                "reference": "4cc194afc8dcd30239b942c34c69a108ceca8097",
+                "url": "https://api.github.com/repos/etna-alternance/composer-behat-utils/zipball/6f825de3020ebde479ab46f35398c70e7d041834",
+                "reference": "6f825de3020ebde479ab46f35398c70e7d041834",
                 "shasum": ""
             },
             "require": {
@@ -2882,10 +2882,10 @@
                 "utils"
             ],
             "support": {
-                "source": "https://github.com/etna-alternance/composer-behat-utils/tree/v3.0.5",
+                "source": "https://github.com/etna-alternance/composer-behat-utils/tree/v3.0.6",
                 "issues": "https://github.com/etna-alternance/composer-behat-utils/issues"
             },
-            "time": "2019-03-29T09:20:32+00:00"
+            "time": "2019-04-19T14:47:21+00:00"
         },
         {
             "name": "etna/php-rsa",
